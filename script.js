@@ -14,10 +14,19 @@ function deleteLast() {
 
 function calculate() {
   try {
-    if (!display.value) return;
-    const result = eval(display.value);
-    display.value = Number.isFinite(result) ? result : 'Error';
-  } catch {
+    if (display.value === '') return;
+    display.value = eval(display.value);
+  } catch (error) {
     display.value = 'Error';
   }
 }
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Backspace') {
+    deleteLast();
+  } else if (e.key === 'Escape') {
+    clearDisplay();
+  } else if (e.key === 'Enter') {
+    calculate();
+  }
+});
